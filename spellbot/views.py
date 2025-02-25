@@ -53,6 +53,14 @@ class HangmanGameView(APIView):
                 "status": "success",
                 "username": "spellbot"}
             return Response(response, status=status.HTTP_200_OK)
+        elif len(user_input) > 1 and user_input not in ["!start", "!end"]:
+            end_hangman_game(channel_id)
+            response = {
+                "event_name": "game status",
+                "message": user_input,
+                "status": "success",
+                "username": "spellbot"}
+            return Response(response, status=status.HTTP_200_OK)
         return Response(
             {
                 "even_name": "invalid entry",
